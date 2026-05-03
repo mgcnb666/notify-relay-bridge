@@ -250,17 +250,3 @@ INTERNET
 ACCESS_NETWORK_STATE
 BIND_NOTIFICATION_LISTENER_SERVICE  # system-bound permission; user must enable notification access manually
 ```
-
-The app does not use:
-
-```text
-WebView
-root
-Accessibility Service
-screen capture/OCR
-SMS permissions
-contacts permissions
-location permissions
-camera/microphone permissions
-overlay permissions
-```
