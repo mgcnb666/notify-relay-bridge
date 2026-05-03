@@ -1,0 +1,22 @@
+# Runtime secrets and received notification data
+key.env
+*.env
+data/*.jsonl
+data/*.log
+data/*.db
+
+# Keep the data directory but never commit captured content
+!data/.gitkeep
+
+# Android/Gradle generated files
+app/.gradle/
+app/**/build/
+app/local.properties
+*.jks
+*.keystore
+
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+*.swp
