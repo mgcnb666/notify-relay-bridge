@@ -7,7 +7,7 @@ A generic Android notification forwarding suite: the Android app listens to user
 ### 1. Prepare the project directory
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 ```
 
 Directory layout:
@@ -22,7 +22,7 @@ README.zh-CN.md Chinese README
 ### 2. Start the receiver server
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 python3 server/notify_receiver.py \
   --host 0.0.0.0 \
   --port 8788 \
@@ -47,7 +47,7 @@ The file permission is set to `600`.
 ### 3. Read the receiver key
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 python3 - <<'PY'
 from pathlib import Path
 for line in Path('key.env').read_text().splitlines():
@@ -123,7 +123,7 @@ curl -sS http://127.0.0.1:8788/health
 Write a test record with the key:
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 KEY=$(python3 - <<'PY'
 from pathlib import Path
 for line in Path('key.env').read_text().splitlines():
@@ -141,11 +141,11 @@ curl -sS -X POST http://127.0.0.1:8788/ingest \
 Inspect the output file summary:
 
 ```bash
-wc -l /root/work/notify-relay-bridge/data/notifications.jsonl
+wc -l data/notifications.jsonl
 python3 - <<'PY'
 from pathlib import Path
 import json
-p = Path('/root/work/notify-relay-bridge/data/notifications.jsonl')
+p = Path('data/notifications.jsonl')
 last = p.read_text(encoding='utf-8').splitlines()[-1]
 obj = json.loads(last)
 print('received_at=', obj.get('received_at'))

@@ -7,7 +7,7 @@
 ### 1. 准备目录
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 ```
 
 目录内容：
@@ -20,7 +20,7 @@ server/   Python 接收端服务器源码
 ### 2. 启动接收端服务器
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 python3 server/notify_receiver.py \
   --host 0.0.0.0 \
   --port 8788 \
@@ -43,7 +43,7 @@ NOTIFY_RELAY_KEY=自动生成的随机key
 ### 3. 查看key
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 python3 - <<'PY'
 from pathlib import Path
 for line in Path('key.env').read_text().splitlines():
@@ -119,7 +119,7 @@ curl -sS http://127.0.0.1:8788/health
 带密钥写入测试记录：
 
 ```bash
-cd /root/work/notify-relay-bridge
+cd notify-relay-bridge
 KEY=$(python3 - <<'PY'
 from pathlib import Path
 for line in Path('key.env').read_text().splitlines():
@@ -137,11 +137,11 @@ curl -sS -X POST http://127.0.0.1:8788/ingest \
 查看写入文件概要：
 
 ```bash
-wc -l /root/work/notify-relay-bridge/data/notifications.jsonl
+wc -l data/notifications.jsonl
 python3 - <<'PY'
 from pathlib import Path
 import json
-p = Path('/root/work/notify-relay-bridge/data/notifications.jsonl')
+p = Path('data/notifications.jsonl')
 last = p.read_text(encoding='utf-8').splitlines()[-1]
 obj = json.loads(last)
 print('received_at=', obj.get('received_at'))
