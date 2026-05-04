@@ -26,15 +26,16 @@ final class RelayPoster {
             String err = "";
             boolean ok = false;
             String pushContent = notification == null ? "" : notification.combinedText();
+            boolean english = RelayConfig.isEnglish(app);
             try {
                 if (endpoint == null || endpoint.trim().isEmpty() || endpoint.contains("YOUR_SERVER_IP")) {
-                    throw new IllegalArgumentException("请先填写服务器 /ingest 地址");
+                    throw new IllegalArgumentException(english ? "Please enter the server /ingest URL first" : "请先填写服务器 /ingest 地址");
                 }
                 if (relayKey == null || relayKey.trim().isEmpty()) {
-                    throw new IllegalArgumentException("请先填写接收密钥");
+                    throw new IllegalArgumentException(english ? "Please enter the receiver key first" : "请先填写接收密钥");
                 }
                 if (notification == null) {
-                    throw new IllegalArgumentException("通知内容为空");
+                    throw new IllegalArgumentException(english ? "Notification content is empty" : "通知内容为空");
                 }
 
                 JSONObject notif = new JSONObject();
@@ -90,10 +91,13 @@ final class RelayPoster {
     }
 
     static void postTest(Context context, String endpoint, String relayKey, Callback cb) {
+        boolean english = RelayConfig.isEnglish(context.getApplicationContext());
         NotificationPayload p = new NotificationPayload();
         p.title = "Notify Relay Bridge";
-        p.text = "测试通知转发内容";
-        p.bigText = "这是一条测试推送内容，用于验证 App 到接收端服务器的 /ingest 链路。";
+        p.text = english ? "Test notification forwarding content" : "测试通知转发内容";
+        p.bigText = english
+                ? "This is a test push payload for checking the app-to-receiver /ingest link."
+                : "这是一条测试推送内容，用于验证 App 到接收端服务器的 /ingest 链路。";
         p.category = "test";
         p.channelId = "manual_test";
         p.key = "manual_test";

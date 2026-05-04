@@ -12,8 +12,15 @@ data/*.db
 app/.gradle/
 app/**/build/
 app/local.properties
+*.apk
+*.aab
 *.jks
 *.keystore
+
+# Python test cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
 
 # OS/editor noise
 .DS_Store

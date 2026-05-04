@@ -2,6 +2,14 @@
 
 A generic Android notification forwarding suite: the Android app listens to user-authorized system notifications, forwards matching notification fields to the receiver server, and the server records content, remarks, and receive timestamps into a JSONL file.
 
+Current Android APK: `/root/work/notify-relay-bridge/Notify-Relay-Bridge-v1.2.0-debug.apk`.
+
+v1.2.0 changes:
+
+- The app UI defaults to English.
+- Added a persistent language selector: `English` / `中文`.
+- Test payloads and local validation errors follow the selected language.
+
 ## Installation
 
 ### 1. Prepare the project directory

@@ -11,6 +11,7 @@ final class RelayConfig {
     static final String KEY_PACKAGES = "packages";
     static final String KEY_KEYWORDS = "keywords";
     static final String KEY_SHOW_PUSH_CONTENT_LOCAL = "show_push_content_local";
+    static final String KEY_LANGUAGE = "language";
     static final String KEY_LAST_STATUS = "last_status";
     static final String KEY_LAST_ERROR = "last_error";
     static final String KEY_LAST_TS = "last_ts";
@@ -21,6 +22,9 @@ final class RelayConfig {
     static final String DEFAULT_URL = "http://YOUR_SERVER_IP:8788/ingest";
     static final String DEFAULT_PACKAGES = "com.whatsapp,com.whatsapp.w4b";
     static final String DEFAULT_KEYWORDS = "*";
+    static final String LANG_EN = "en";
+    static final String LANG_ZH = "zh";
+    static final String DEFAULT_LANGUAGE = "en";
 
     private RelayConfig() {}
 
@@ -46,6 +50,21 @@ final class RelayConfig {
 
     static String keywords(Context c) {
         return prefs(c).getString(KEY_KEYWORDS, DEFAULT_KEYWORDS);
+    }
+
+    static String language(Context c) {
+        String value = prefs(c).getString(KEY_LANGUAGE, DEFAULT_LANGUAGE);
+        if (LANG_ZH.equals(value)) return LANG_ZH;
+        return LANG_EN;
+    }
+
+    static boolean isEnglish(Context c) {
+        return LANG_EN.equals(language(c));
+    }
+
+    static void setLanguage(Context c, String language) {
+        String clean = LANG_ZH.equals(language) ? LANG_ZH : LANG_EN;
+        prefs(c).edit().putString(KEY_LANGUAGE, clean).apply();
     }
 
     static void save(Context c, boolean enabled, String url, String relayKey, String packages, String keywords, boolean showPushContentLocal) {
