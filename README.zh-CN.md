@@ -2,14 +2,6 @@
 
 通用 Android 通知转发套件：Android App 监听用户授权的系统通知，把匹配配置的通知字段发送到接收端服务器；接收端只记录内容、备注和接收时间，并追加写入 JSONL 文件。
 
-当前 Android APK：`/root/work/notify-relay-bridge/Notify-Relay-Bridge-v1.2.0-debug.apk`。
-
-v1.2.0 变更：
-
-- App 默认英文界面。
-- 新增持久化语言选择：`English` / `中文`。
-- 测试推送内容和本地校验错误会跟随所选语言。
-
 ## 安装
 
 ### 1. 准备目录
